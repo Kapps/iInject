@@ -48,6 +48,7 @@
     <Compile Include="InjectionSession.cs" />
     <Compile Include="IPageProvider.cs" />
     <Compile Include="PageCrawler.cs" />
+    <Compile Include="PagesFromFile.cs" />
     <Compile Include="PageQueue.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
