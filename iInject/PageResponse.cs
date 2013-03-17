@@ -26,10 +26,16 @@ namespace iInject {
 		/// </summary>
 		public Uri Uri { get; private set; }
 
-		public PageResponse(HttpStatusCode StatusCode, IEnumerable<WebForm> Forms, Uri Uri) {
+		/// <summary>
+		/// Gets the raw text of the response.
+		/// </summary>
+		public string RawText { get; private set; }
+
+		public PageResponse(string RawText, HttpStatusCode StatusCode, IEnumerable<WebForm> Forms, Uri Uri) {
 			this.StatusCode = StatusCode;
 			this.Forms = Forms;
 			this.Uri = Uri;
+			this.RawText = RawText;
 		}
 
 		public override string ToString() {

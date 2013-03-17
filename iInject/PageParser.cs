@@ -41,7 +41,7 @@ namespace iInject {
 				WebForm Form = new WebForm(FormName, Target, Method, Controls);
 				Forms.Add(Form);
 			}
-			return new PageResponse(Code, Forms, Uri);
+			return new PageResponse(ResponseData, Code, Forms, Uri);
 		}
 
 		private string GetDefaultFormName() {

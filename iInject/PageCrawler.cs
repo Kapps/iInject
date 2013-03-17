@@ -19,9 +19,15 @@ namespace iInject {
 		public PageQueue Queue { get; private set; }
 
 		/// <summary>
+		/// Gets the parser being used for handling crawled pages.
+		/// </summary>
+		public PageParser Parser { get; private set; }
+
+		/// <summary>
 		/// Creates a new PageCrawler with an empty PageQueue.
 		/// </summary>
 		public PageCrawler() {
+			this.Parser = new PageParser();
 			this.Queue = new PageQueue();
 		}
 
@@ -30,7 +36,6 @@ namespace iInject {
 		/// All pages that are loaded are passed in to the ResponseHandler for processing.
 		/// </summary>
 		public async Task CrawlPagesAsync(Action<PageResponse> ResponseHandler) {
-			PageParser Parser = new PageParser();
 			foreach(var PageUri in Queue.GetPages()) {
 				HttpClient Client = new HttpClient();
 				var Response = await Client.GetAsync(PageUri);
