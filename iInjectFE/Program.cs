@@ -14,10 +14,9 @@ namespace iInjectFE {
 			// 64.201.201.162
 			InjectionSession Session = new InjectionSession();
 			SleepInjectionProvider SleepProvider = new SleepInjectionProvider(Session);
+			Session.Providers.Add(SleepProvider);
 			Session.Crawler.Queue.AddProvider(new ConsolePageProvider());
-			Session.Crawler.CrawlPagesAsync((Response) => {
-				Console.WriteLine(Response);
-			}).Wait();
+			Session.ScanForVulnerabilitiesAsync().Wait();
 			Console.WriteLine("Done! Press any key to continue.");
 			Console.ReadKey();
 			/*var Lines = File.ReadAllLines("blah.txt");
