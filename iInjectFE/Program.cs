@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using iInjectProviders;
 
 namespace iInjectFE {
 	class Program {
 		static void Main(string[] args) {
 			// 64.201.201.162
 			InjectionSession Session = new InjectionSession();
+			SleepInjectionProvider SleepProvider = new SleepInjectionProvider(Session);
 			Session.Crawler.Queue.AddProvider(new ConsolePageProvider());
 			Session.Crawler.CrawlPagesAsync((Response) => {
 				Console.WriteLine(Response);

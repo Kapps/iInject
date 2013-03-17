@@ -31,5 +31,26 @@ namespace iInject {
 			this.Type = Type;
 			this.Value = Value;
 		}
+
+		/// <summary>
+		/// Returns a default value that may be valid for this control.
+		/// </summary>
+		/// <param name="UseExisting">If true, Value is returned if it is not null or empty.</param>
+		public string GenerateDefaultValue(bool UseExisting) {
+			if(UseExisting && !String.IsNullOrWhiteSpace(Value))
+				return Value;
+			
+			switch(Type.ToLower()) {
+				case "text":
+				default:
+					string Result = "";
+					int NumChars = rnd.Next(3, 9);
+					for(int i = 0; i < NumChars; i++)
+						Result += (char)rnd.Next((int)'a', (int)'z' + 1);
+					return Result;
+			}
+		}
+
+		private Random rnd = new Random();
 	}
 }
