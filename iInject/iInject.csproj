@@ -50,6 +50,7 @@
     <Compile Include="VersionDetect.cs" />
     <Compile Include="IInjectionProvider.cs" />
     <Compile Include="InjectionSession.cs" />
+    <Compile Include="IVulnerabilityScanner.cs" />
     <Compile Include="IPageProvider.cs" />
     <Compile Include="PageCrawler.cs" />
     <Compile Include="PageParser.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="ProviderCollection.cs" />
     <Compile Include="ProviderManager.cs" />
     <Compile Include="ProviderOptions.cs" />
+    <Compile Include="VulnerabilityDetails.cs" />
     <Compile Include="WebForm.cs" />
     <Compile Include="WebFormControl.cs" />
   </ItemGroup>
