@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPageProvider.cs" />
+    <Compile Include="PagesFromFile.cs" />
     <Compile Include="PageQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
