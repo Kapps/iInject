@@ -11,15 +11,22 @@ namespace iInject
     /// </summary>
     class VersionDetect
     {
-
+        /// <summary>
+        /// listen to event in session
+        /// </summary>
+        /// <param name="SessionToListen"></param>
+        public void listen(InjectionSession SessionToListen)
+        {
+            SessionToListen.VulnerabilityDetected += SessionToListen_VulnerabilityDetected;
+        }
         /// <summary>
         /// inputs a string into the form causing errors on wrong version until correct version found
         /// </summary>
         /// <param name="toScan"></param>
-        public void VersionScan(WebForm toScan)
+        void SessionToListen_VulnerabilityDetected(VulnerabilityDetails obj)
         {
-
-
+            //implement
         }
+
     }
 }
