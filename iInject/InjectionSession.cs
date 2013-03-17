@@ -38,6 +38,22 @@ namespace iInject {
 				this.VulnerabilityDetected(Details);
 		}
 
+		/// <summary>
+		/// Asynchronously scans for vulnerabilities using the currently defined providers.
+		/// </summary>
+		public async Task ScanForVulnerabilitiesAsync() {
+			await Crawler.CrawlPagesAsync(async (Response) => {
+				foreach(IVulnerabilityScanner Scanner in Providers.Where(c => c is IVulnerabilityScanner)) {
+					foreach(var Form in Response.Forms) {
+						var Vulnerabilities = await Scanner.ScanForVulnerabilitiesAsync(Form);
+						foreach(var Vulnerability in Vulnerabilities)
+							if(this.VulnerabilityDetected != null)
+								this.VulnerabilityDetected(Vulnerability);
+					}
+				}
+			});
+		}
+
 		private ProviderCollection _Providers = new ProviderCollection();
 		private PageCrawler _Crawler = new PageCrawler();
 	}

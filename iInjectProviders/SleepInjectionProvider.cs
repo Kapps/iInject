@@ -35,7 +35,7 @@ namespace iInjectProviders {
 					try {
 						Response = await SubmitTask;
 					} catch(Exception) { } // If an exception, do nothing as we can expect a timeout.
-					
+					// TODO: Check to make sure regular call doesn't take this long.
 					DateTime StopTime = DateTime.Now;
 					if((StopTime - StartTime).TotalSeconds > 15) {
 						Results.Add(new VulnerabilityDetails(Form, Control, this));
