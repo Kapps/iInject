@@ -5,10 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace iInject {
+	
 	/// <summary>
 	/// Provides a single session to be used for performing injections.
 	/// </summary>
 	public class InjectionSession {
+
+		/// <summary>
+		/// Gets an event called when a vulnerability is found on a page.
+		/// </summary>
+		public event Action<VulnerabilityDetails> VulnerabilityDetected;
 
 		/// <summary>
 		/// Gets the crawler used to scan pages.

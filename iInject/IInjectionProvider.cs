@@ -9,9 +9,9 @@ namespace iInject {
 	/// Provides the base interface for all provider implementations.
 	/// </summary>
 	/// <remarks>
-	/// When the plugin handler creates a class that implements this interface,
-	/// it will first scan for a constructor that takes in a ProviderOptions instance.
-	/// If that exists, it will use that. Otherwise, it will use an empty constructor.
+	/// The following values will be passed in when a constructor is found that accepts them:
+	///		InjectionSession
+	///		ProviderOptions
 	/// </remarks>
 	public interface IInjectionProvider {
 		/// <summary>

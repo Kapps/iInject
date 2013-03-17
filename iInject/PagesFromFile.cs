@@ -5,22 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iInject
-{
-    class PagesFromFile : IPageProvider
-    {
+namespace iInject {
+	class PagesFromFile : IPageProvider {
 
+		public string Name {
+			get { return "File Page Provider"; }
+		}
 
-        public IEnumerable<Uri> GetPagesToScan()
-        {   //reads in file to scan
-            // each Uri is separated by a newline
-            string Filename = Console.ReadLine();
-            var Lines = File.ReadAllLines(Filename);
-            foreach (var line in Lines)
-            {
-                Uri path = new Uri(line);
-                yield return path;
-            }
-        }
-    }
+		public IEnumerable<Uri> GetPagesToScan() {   //reads in file to scan
+			// each Uri is separated by a newline
+			string Filename = Console.ReadLine();
+			var Lines = File.ReadAllLines(Filename);
+			foreach(var line in Lines) {
+				Uri path = new Uri(line);
+				yield return path;
+			}
+		}
+	}
 }
