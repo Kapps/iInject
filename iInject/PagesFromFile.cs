@@ -7,14 +7,21 @@ using System.Threading.Tasks;
 
 namespace iInject
 {
+    /// <summary>
+    /// get Uris from file
+    /// </summary>
     class PagesFromFile : IPageProvider
     {
+        /// <summary>
+        /// provides list of \n seperated Uris from a file specified with parameter
+        /// </summary>
+        /// <param name="FileToScan"></param>
+        /// <returns></returns>
 
-
-        public IEnumerable<Uri> GetPagesToScan()
+        public IEnumerable<Uri> GetPagesToScan(string FileToScan)
         {   //reads in file to scan
             // each Uri is separated by a newline
-            string Filename = Console.ReadLine();
+            string Filename = FileToScan;
             var Lines = File.ReadAllLines(Filename);
             foreach (var line in Lines)
             {
