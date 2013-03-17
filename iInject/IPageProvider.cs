@@ -8,11 +8,12 @@ namespace iInject {
 	/// <summary>
 	/// Provides an interface for a provider that can generate a list of pages to search.
 	/// </summary>
-	public interface IPageProvider {
+	public interface IPageProvider : IInjectionProvider {
 
 		/// <summary>
 		/// Returns a collection of pages that can be scanned.
 		/// </summary>
-		public IEnumerable<Uri> GetPagesToScan();
+		IEnumerable<Uri> GetPagesToScan();
+
 	}
 }

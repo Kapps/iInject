@@ -2,3 +2,4 @@
 */obj/*
 */bin/*
 *.suo
+packages/Newtonsoft.Json.4.5.11/*
