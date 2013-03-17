@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VersionDetect.cs" />
     <Compile Include="IInjectionProvider.cs" />
     <Compile Include="InjectionSession.cs" />
     <Compile Include="IVulnerabilityScanner.cs" />
