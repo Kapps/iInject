@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +27,17 @@ namespace iInject {
 
 		/// <summary>
 		/// Begins crawling all pages currently in the queue asynchronously.
+		/// All pages that are loaded are passed in to the ResponseHandler for processing.
 		/// </summary>
-		public async Task CrawlPagesAsync() {
+		public async Task CrawlPagesAsync(Action<PageResponse> ResponseHandler) {
+			PageParser Parser = new PageParser();
 			foreach(var PageUri in Queue.GetPages()) {
 				HttpClient Client = new HttpClient();
-				string PageContents = await Client.GetStringAsync(PageUri);
+				var Response = await Client.GetAsync(PageUri);
+				var StatusCode = Response.StatusCode;
+				var Contents = await Response.Content.ReadAsStringAsync();
+				var ResponseData = Parser.GetResponse(PageUri, StatusCode, Contents);
+				ResponseHandler(ResponseData);
 			}
 		}
 	}

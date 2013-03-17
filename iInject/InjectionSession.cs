@@ -30,6 +30,13 @@ namespace iInject {
 			get { return _Providers; }
 		}
 
+		/// <summary>
+		/// Notifies the session that the given vulnerability was detected.
+		/// </summary>
+		public void NotifyVulnerability(VulnerabilityDetails Details) {
+			if(this.VulnerabilityDetected != null)
+				this.VulnerabilityDetected(Details);
+		}
 
 		private ProviderCollection _Providers = new ProviderCollection();
 		private PageCrawler _Crawler = new PageCrawler();

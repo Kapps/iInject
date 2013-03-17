@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsolePageProvider.cs" />
+    <Compile Include="PageResponse.cs" />
     <Compile Include="VersionDetect.cs" />
     <Compile Include="IInjectionProvider.cs" />
     <Compile Include="InjectionSession.cs" />
