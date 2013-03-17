@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsolePageProvider.cs" />
+    <Compile Include="PageResponse.cs" />
     <Compile Include="VersionDetect.cs" />
     <Compile Include="IInjectionProvider.cs" />
     <Compile Include="InjectionSession.cs" />
@@ -54,7 +56,7 @@
     <Compile Include="IPageProvider.cs" />
     <Compile Include="PageCrawler.cs" />
     <Compile Include="PageParser.cs" />
-    <Compile Include="PagesFromFile.cs" />
+    <Compile Include="FilePageProvider.cs" />
     <Compile Include="PageQueue.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

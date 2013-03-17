@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace iInject {
 	
@@ -35,5 +36,24 @@ namespace iInject {
 			this.Controls = Controls.ToList();
 		}
 		
+		/// <summary>
+		/// Asynchronously submits this form with the current values it holds, returning the new page.
+		/// </summary>
+		/// <param name="Parser">The parser used to parse the response into a PageResponse.</param>
+		public async Task<PageResponse> SubmitAsync(PageParser Parser) {
+			HttpClient Client = new HttpClient();
+			var Response = await Client.GetAsync(Target);
+			var StatusCode = Response.StatusCode;
+			var Contents = await Response.Content.ReadAsStringAsync();
+			var ResponseData = Parser.GetResponse(Target, StatusCode, Contents);
+			return ResponseData;
+		}
+
+		public override string ToString() {
+			string Result = this.Name;
+			foreach(var Control in this.Controls)
+				Result += "\r\n\t" + Control.Name + " = " + Control.Value;
+			return Result;
+		}
 	}
 }

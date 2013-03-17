@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace iInject {
 	/// <summary>
-	/// get Uris from file
+	/// A page provider that gets it's Uris from reading a file.
 	/// </summary>
-	class PagesFromFile : IPageProvider {
+	public class FilePageProvider : IPageProvider {
 
 		public string Name {
 			get { return "File Page Provider"; }
+		}
+
+		public FilePageProvider(string FileName) {
+			this._FileName = FileName;
 		}
 
 		/// <summary>
@@ -20,14 +24,15 @@ namespace iInject {
 		/// </summary>
 		/// <param name="FileToScan"></param>
 		/// <returns></returns>
-		public IEnumerable<Uri> GetPagesToScan(string FileToScan) {   //reads in file to scan
+		public IEnumerable<Uri> GetPagesToScan() {   //reads in file to scan
 			// each Uri is separated by a newline
-			string Filename = FileToScan;
-			var Lines = File.ReadAllLines(Filename);
+			var Lines = File.ReadAllLines(_FileName);
 			foreach(var line in Lines) {
 				Uri path = new Uri(line);
 				yield return path;
 			}
 		}
+
+		private string _FileName;
 	}
 }

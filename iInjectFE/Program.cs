@@ -10,8 +10,12 @@ using System.Net;
 namespace iInjectFE {
 	class Program {
 		static void Main(string[] args) {
+			// 64.201.201.162
 			InjectionSession Session = new InjectionSession();
-			Session.Crawler.CrawlPagesAsync().Wait();
+			Session.Crawler.Queue.AddProvider(new ConsolePageProvider());
+			Session.Crawler.CrawlPagesAsync((Response) => {
+				Console.WriteLine(Response);
+			}).Wait();
 			Console.WriteLine("Done! Press any key to continue.");
 			Console.ReadKey();
 			/*var Lines = File.ReadAllLines("blah.txt");
