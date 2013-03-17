@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -49,6 +52,7 @@
     <Compile Include="InjectionSession.cs" />
     <Compile Include="IPageProvider.cs" />
     <Compile Include="PageCrawler.cs" />
+    <Compile Include="PageParser.cs" />
     <Compile Include="PagesFromFile.cs" />
     <Compile Include="PageQueue.cs" />
     <Compile Include="PluginManager.cs" />
@@ -56,6 +60,8 @@
     <Compile Include="ProviderCollection.cs" />
     <Compile Include="ProviderManager.cs" />
     <Compile Include="ProviderOptions.cs" />
+    <Compile Include="WebForm.cs" />
+    <Compile Include="WebFormControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
