@@ -19,27 +19,30 @@ namespace iInject {
 			HtmlDocument doc = new HtmlDocument();
 			doc.LoadHtml(ResponseData);
 			List<WebForm> Forms = new List<WebForm>();
-			foreach(HtmlNode FormNode in doc.DocumentNode.SelectNodes("//form")) {
-				string FormName = FormNode.GetAttributeValue("name", GetDefaultFormName());
-				HttpMethod Method = new HttpMethod(FormNode.GetAttributeValue("method", "GET").ToUpper());
-				string TargetPath = FormNode.GetAttributeValue("action", Uri.LocalPath);
-				Uri Target = new Uri(Uri, TargetPath);
-				List<WebFormControl> Controls = new List<WebFormControl>();
-				foreach(HtmlNode InputNode in FormNode.SelectNodes(".//input")) {
-					string InputType = InputNode.GetAttributeValue("type", "text").ToLower();
-					if(InputType == "submit" || InputType == "button")
-						continue; // We don't want to include submit buttons.
-					string InputName = InputNode.GetAttributeValue("name", null);
-					// If it's null, skip this element as we can't do much with it.
-					if(String.IsNullOrWhiteSpace(InputName))
-						continue;
-					// TODO: Allow something like <input type="text">Blah</input>.
-					string InputValue = InputNode.GetAttributeValue("value", null);
-					WebFormControl Control = new WebFormControl(InputName, InputType, InputValue);
-					Controls.Add(Control);
+			var FormNodes = doc.DocumentNode.SelectNodes("//form");
+			if(FormNodes != null) {
+				foreach(HtmlNode FormNode in FormNodes) {
+					string FormName = FormNode.GetAttributeValue("name", GetDefaultFormName());
+					HttpMethod Method = new HttpMethod(FormNode.GetAttributeValue("method", "GET").ToUpper());
+					string TargetPath = FormNode.GetAttributeValue("action", Uri.LocalPath);
+					Uri Target = new Uri(Uri, TargetPath);
+					List<WebFormControl> Controls = new List<WebFormControl>();
+					foreach(HtmlNode InputNode in FormNode.SelectNodes(".//input")) {
+						string InputType = InputNode.GetAttributeValue("type", "text").ToLower();
+						if(InputType == "submit" || InputType == "button")
+							continue; // We don't want to include submit buttons.
+						string InputName = InputNode.GetAttributeValue("name", null);
+						// If it's null, skip this element as we can't do much with it.
+						if(String.IsNullOrWhiteSpace(InputName))
+							continue;
+						// TODO: Allow something like <input type="text">Blah</input>.
+						string InputValue = InputNode.GetAttributeValue("value", null);
+						WebFormControl Control = new WebFormControl(InputName, InputType, InputValue);
+						Controls.Add(Control);
+					}
+					WebForm Form = new WebForm(FormName, Target, Method, Controls);
+					Forms.Add(Form);
 				}
-				WebForm Form = new WebForm(FormName, Target, Method, Controls);
-				Forms.Add(Form);
 			}
 			return new PageResponse(ResponseData, Code, Forms, Uri);
 		}

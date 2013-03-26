@@ -13,8 +13,8 @@ namespace iInjectFE {
 		static void Main(string[] args) {
 			// 64.201.201.162
 			InjectionSession Session = new InjectionSession();
-			SleepInjectionProvider SleepProvider = new SleepInjectionProvider(Session);
-			Session.Providers.Add(SleepProvider);
+			var Provider = new ErrorInjectionProvider(Session);
+			Session.Providers.Add(Provider);
 			Session.Crawler.Queue.AddProvider(new ConsolePageProvider());
 			Session.ScanForVulnerabilitiesAsync().Wait();
 			Console.WriteLine("Done! Press any key to continue.");

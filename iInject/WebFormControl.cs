@@ -9,6 +9,8 @@ namespace iInject {
 	/// Indicates a single control inside a web form.
 	/// </summary>
 	public class WebFormControl {
+
+		private static readonly HashSet<string> SpecialNames = new HashSet<string>() { "__EVENTVALIDATION", "__VIEWSTATE" };
 		
 		/// <summary>
 		/// Gets the name of this control.
@@ -30,6 +32,18 @@ namespace iInject {
 			this.Name = Name;
 			this.Type = Type;
 			this.Value = Value;
+		}
+
+		public override string ToString() {
+			return "Control: " + this.Name + " = " + this.Value;
+		}
+
+		/// <summary>
+		/// Indicates if this control is a special control that usually should not attempt to be exploited.
+		/// An example is the viewstate control for ASP.NET applications.
+		/// </summary>
+		public bool IsSpecialControl() {
+			return SpecialNames.Contains(this.Name);
 		}
 
 		/// <summary>

