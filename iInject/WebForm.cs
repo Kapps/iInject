@@ -7,12 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace iInject {
-	
 	/// <summary>
 	/// Represents a single form returned in an html page, with options to set control values.
 	/// </summary>
 	public class WebForm {
-
 		/// <summary>
 		/// Gets the name of this form. This is never null, but may be auto-generated.
 		/// </summary>
@@ -30,6 +28,9 @@ namespace iInject {
 		/// </summary>
 		public List<WebFormControl> Controls { get; private set; }
 
+		/// <summary>
+		/// Creates a new WebForm with the given data.
+		/// </summary>
 		public WebForm(string Name, Uri Target, HttpMethod Method, IEnumerable<WebFormControl> Controls) {
 			this.Name = Name;
 			this.Target = Target;
@@ -55,6 +56,9 @@ namespace iInject {
 			return ResponseData;
 		}
 
+		/// <summary>
+		/// Returns a string representation of this form that includes all controls.
+		/// </summary>
 		public override string ToString() {
 			string Result = this.Name;
 			foreach(var Control in this.Controls)

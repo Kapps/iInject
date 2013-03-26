@@ -10,6 +10,9 @@ namespace iInject {
 	/// </summary>
 	public class WebFormControl {
 
+		/// <summary>
+		/// Stores a list of control names with special significance to a framework. This currently only includes ASP.NET.
+		/// </summary>
 		private static readonly HashSet<string> SpecialNames = new HashSet<string>() { "__EVENTVALIDATION", "__VIEWSTATE" };
 		
 		/// <summary>
@@ -28,6 +31,9 @@ namespace iInject {
 		/// </summary>
 		public string Type { get; private set; }
 
+		/// <summary>
+		/// Creates a new WebFormControl with the given data.
+		/// </summary>
 		public WebFormControl(string Name, string Type, string Value) {
 			this.Name = Name;
 			this.Type = Type;

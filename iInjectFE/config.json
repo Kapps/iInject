@@ -3,5 +3,7 @@
 ],
 "providers": [
 	{ "name": "Console Queue" },
-	{ "name": "Error Scanner" }
+	{ "name": "Error Scanner" },
+	{ "name": "Console Handler" },
+	{ "name": "Script Scanner" }
 ]

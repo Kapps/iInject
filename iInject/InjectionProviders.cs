@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace iInject {
 	/// <summary>
-	/// Globally stores information about available injection providers.
+	/// Globally stores information about available injection providers and allows them to be created as desired.
 	/// </summary>
 	public static class InjectionProviders {
 

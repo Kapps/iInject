@@ -10,6 +10,14 @@ namespace iInject {
 	/// </summary>
 	public class PageQueue {
 
+		/// <summary>
+		/// Gets the session that this queue applies to.
+		/// </summary>
+		public InjectionSession Session { get; private set; }
+
+		/// <summary>
+		/// Creates a new PageQueue with the given session.
+		/// </summary>
 		public PageQueue(InjectionSession Session) {
 			this.Session = Session;
 		}
@@ -24,6 +32,5 @@ namespace iInject {
 					yield return Page;
 		}
 
-		private InjectionSession Session;
 	}
 }

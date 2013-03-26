@@ -1,4 +1,8 @@
-﻿using iInject;
+﻿// TODO: I don't think that this would actually work.
+// You can't tell in an automated way if a page returns a value or an error message.
+// Messages could be in a different language, could have a default value, etc.
+
+/*using iInject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,4 +40,4 @@ namespace iInjectProviders {
 			get { return "Sql Injection equals scanner"; }
 		}
 	}
-}
+}*/

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace iInject {
-	
 	/// <summary>
 	/// Provides a single session to be used for performing injections.
 	/// </summary>
@@ -15,8 +14,6 @@ namespace iInject {
 		/// Gets an event called when a vulnerability is found on a page.
 		/// </summary>
 		public event Action<VulnerabilityDetails> VulnerabilityDetected;
-
-		// TODO: Crawlers are also providers; should this be merged?
 
 		/// <summary>
 		/// Gets the crawler used to scan pages.
@@ -32,6 +29,9 @@ namespace iInject {
 			get { return _Providers; }
 		}
 
+		/// <summary>
+		/// Creates a new InjectionSession with the default values.
+		/// </summary>
 		public InjectionSession() {
 			this._Crawler = new PageCrawler(this);
 		}
@@ -42,6 +42,9 @@ namespace iInject {
 		public void NotifyVulnerability(VulnerabilityDetails Details) {
 			if(this.VulnerabilityDetected != null)
 				this.VulnerabilityDetected(Details);
+			foreach(var Handler in this.Providers.Select(c => c as IVulnerabilityHandler).Where(c => c != null)) {
+				Handler.HandleVulnerability(Details);
+			}
 		}
 
 		/// <summary>
@@ -53,8 +56,7 @@ namespace iInject {
 					foreach(var Form in Response.Forms) {
 						var Vulnerabilities = await Scanner.ScanForVulnerabilitiesAsync(Form);
 						foreach(var Vulnerability in Vulnerabilities)
-							if(this.VulnerabilityDetected != null)
-								this.VulnerabilityDetected(Vulnerability);
+							NotifyVulnerability(Vulnerability);
 					}
 				}
 			});

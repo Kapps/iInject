@@ -12,8 +12,6 @@ namespace iInject {
 	/// </summary>
 	public class ProviderCollection : KeyedCollection<string, IInjectionProvider> {
 
-		// TODO: Just serialize the type instead, don't even bother with ProviderCollection.
-
 		/// <summary>
 		/// Creates an empty ProviderCollection.
 		/// </summary>

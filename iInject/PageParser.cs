@@ -9,8 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace iInject {
+	/// <summary>
+	/// Provides a parser that can be used to parse forms out of a response.
+	/// </summary>
 	public class PageParser {
-
 		/// <summary>
 		/// Parses the forms present in the given HTML response data.
 		/// </summary>

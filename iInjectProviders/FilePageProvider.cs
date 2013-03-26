@@ -12,26 +12,26 @@ namespace iInjectProviders {
 	/// </summary>
 	public class FilePageProvider : IPageProvider {
 
+		/// <summary>
+		/// Gets a unique name for this provider.
+		/// </summary>
 		public string Name {
-			get { return "File Page Provider"; }
-		}
-
-		public FilePageProvider(ProviderOptions Options) {
-			this._FileName = null; // TODO: Implement options and get name from there.
+			get { return "File Page Queue"; }
 		}
 
 		/// <summary>
-		/// provides list of \n seperated Uris from a file specified with parameter
+		/// Creates a new FilePageProvider with the given options.
+		/// Options is expected to contain a FileName property indicating what file to read from.
 		/// </summary>
-		/// <param name="FileToScan"></param>
-		/// <returns></returns>
-		public IEnumerable<Uri> GetPagesToScan() {   //reads in file to scan
-			// each Uri is separated by a newline
-			var Lines = File.ReadAllLines(_FileName);
-			foreach(var line in Lines) {
-				Uri path = new Uri(line);
-				yield return path;
-			}
+		public FilePageProvider(ProviderOptions Options) {
+			this._FileName = (string)Options["FileName"];
+		}
+
+		/// <summary>
+		/// Reads all of the lines from the input file, returning each line as a separate Uri.
+		/// </summary>
+		public IEnumerable<Uri> GetPagesToScan() {
+			return File.ReadAllLines(_FileName).Where(c=>!String.IsNullOrWhiteSpace(c)).Select(c => new Uri(c));
 		}
 
 		private string _FileName;

@@ -10,7 +10,6 @@ namespace iInject {
 	/// Provides information about the results of an HTTP request.
 	/// </summary>
 	public class PageResponse {
-
 		/// <summary>
 		/// Gets the status code that was returned.
 		/// </summary>
@@ -31,6 +30,9 @@ namespace iInject {
 		/// </summary>
 		public string RawText { get; private set; }
 
+		/// <summary>
+		/// Creates a new PageResponse with the given data.
+		/// </summary>
 		public PageResponse(string RawText, HttpStatusCode StatusCode, IEnumerable<WebForm> Forms, Uri Uri) {
 			this.StatusCode = StatusCode;
 			this.Forms = Forms;
@@ -38,6 +40,9 @@ namespace iInject {
 			this.RawText = RawText;
 		}
 
+		/// <summary>
+		/// Returns a human readable representation of the response, not including contents but including forms.
+		/// </summary>
 		public override string ToString() {
 			string Result = "Status Code: " + this.StatusCode + " - URI: " + this.Uri.LocalPath + " - Forms:\r\n";
 			foreach(var Form in this.Forms)

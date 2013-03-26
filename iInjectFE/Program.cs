@@ -10,24 +10,26 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
 namespace iInjectFE {
-	class Program {
+	/// <summary>
+	/// Handles the main entry point for the program.
+	/// </summary>
+	public class Program {
 
+		/// <summary>
+		/// The main entry point for the front-end. Simply parses the config, loads plugins, and begins scanning.
+		/// </summary>
 		static void Main(string[] args) {
-			// Note that iInjectionProviders is referenced right now solely for the purpose of Copy Local.
-			// Otherwise, we'd have to update it ourselves when it changed.
+			// For now, iInjectProviders is referenced for the sole purpose of allowing Copy Local to copy it to the output folder automatically.
+			// It doesn't need to be referenced, nothing is special about it, and we still need to load it at runtime.
+			// It's just a convenience thing.
 			var Config = LoadConfig(args);
 			var Session = ParseSession(Config);
-			Session.VulnerabilityDetected += Session_VulnerabilityDetected;
 			Session.ScanForVulnerabilitiesAsync().Wait();
-			Console.WriteLine("Done! Press any key to continue.");
-			Console.ReadKey();
 		}
 
-		static void Session_VulnerabilityDetected(VulnerabilityDetails obj) {
-			// TODO: Better handle vulnerabilities. Another provider?
-			Console.WriteLine(obj);
-		}
-
+		/// <summary>
+		/// Scans the console arguments for a config file, or uses the default. Returns the JSON Object representing the root of the config.
+		/// </summary>
 		private static JObject LoadConfig(string[] args) {
 			string ConfigFile = args.Length == 0 ? "config.json" : args[0];
 			if(!".JSON".Equals(Path.GetExtension(ConfigFile), StringComparison.InvariantCultureIgnoreCase))
@@ -42,6 +44,9 @@ namespace iInjectFE {
 			return Input;
 		}
 
+		/// <summary>
+		/// Parses session information from a config file.
+		/// </summary>
 		private static InjectionSession ParseSession(JObject Input) {
 			foreach(dynamic Plugin in Input["plugins"])
 				PluginManager.LoadPlugin((string)Plugin);
