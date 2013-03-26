@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleQueueProvider.cs" />
     <Compile Include="ErrorInjectionProvider.cs" />
     <Compile Include="EqualsAndQuotes.cs" />
+    <Compile Include="FilePageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SleepInjectionProvider.cs" />
   </ItemGroup>

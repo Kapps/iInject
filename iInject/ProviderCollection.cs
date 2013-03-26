@@ -5,8 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 namespace iInject {
 	/// <summary>
 	/// Represents a collection of injection providers.
@@ -26,22 +25,6 @@ namespace iInject {
 		protected override string GetKeyForItem(IInjectionProvider item) {
 			return item.Name;
 		}
-
-		/*/// <summary>
-		/// Parses a ProviderCollection from the given JSON input.
-		/// Each provider has a 'Name' and 'Options' properties.
-		/// </summary>
-		public static ProviderCollection Parse(string Json) {
-			ProviderCollection Result = new ProviderCollection();
-			JObject Input = JObject.Parse(Json);
-			foreach(var ProviderObj in Input) {
-				
-				foreach(var Child in ProviderObj["options"].Children()) {
-					
-				}
-				
-			}
-		}*/
 	}
 }
 

@@ -26,9 +26,9 @@ namespace iInject {
 		/// <summary>
 		/// Creates a new PageCrawler with an empty PageQueue.
 		/// </summary>
-		public PageCrawler() {
+		public PageCrawler(InjectionSession Session) {
 			this.Parser = new PageParser();
-			this.Queue = new PageQueue();
+			this.Queue = new PageQueue(Session);
 		}
 
 		/// <summary>

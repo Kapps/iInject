@@ -16,6 +16,8 @@ namespace iInject {
 		/// </summary>
 		public event Action<VulnerabilityDetails> VulnerabilityDetected;
 
+		// TODO: Crawlers are also providers; should this be merged?
+
 		/// <summary>
 		/// Gets the crawler used to scan pages.
 		/// </summary>
@@ -28,6 +30,10 @@ namespace iInject {
 		/// </summary>
 		public ProviderCollection Providers {
 			get { return _Providers; }
+		}
+
+		public InjectionSession() {
+			this._Crawler = new PageCrawler(this);
 		}
 
 		/// <summary>
@@ -55,6 +61,6 @@ namespace iInject {
 		}
 
 		private ProviderCollection _Providers = new ProviderCollection();
-		private PageCrawler _Crawler = new PageCrawler();
+		private PageCrawler _Crawler;
 	}
 }

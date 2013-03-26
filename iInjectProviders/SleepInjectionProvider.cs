@@ -12,6 +12,11 @@ namespace iInjectProviders {
 	/// </summary>
 	public class SleepInjectionProvider : IVulnerabilityScanner {
 
+		// TODO: This is a lousy provider.
+		// It's sole advantage is that it doesn't appear as an exception in the logs.
+		// In theory, shouldn't be detected easily (unless a timeout or they check for long loads).
+		// The issue though is SLEEP is not a standard function (ex: SQL Server does not support it).
+
 		public string VulnerabilityName {
 			get { return "Sql Injection"; }
 		}

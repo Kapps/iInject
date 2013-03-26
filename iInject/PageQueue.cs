@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace iInject {
 	/// <summary>
-	/// Provides a queue of pages to be scanned for vulnerabilities, generated through one or more IPageProviders.
+	/// Provides a queue of pages to be scanned for vulnerabilities, generated through one or more IPageProviders on the session.
 	/// </summary>
 	public class PageQueue {
 
-		/// <summary>
-		/// Adds the given provider to the provider list.
-		/// </summary>
-		public void AddProvider(IPageProvider Provider) {
-			bool Added = _Providers.Add(Provider);
-			if(!Added)
-				throw new ArgumentException("The given provider was already in the provider list.");
+		public PageQueue(InjectionSession Session) {
+			this.Session = Session;
 		}
 
 		/// <summary>
@@ -24,11 +19,11 @@ namespace iInject {
 		/// </summary>
 		/// <returns></returns>
 		public IEnumerable<Uri> GetPages() {
-			foreach(var Provider in _Providers)
+			foreach(var Provider in Session.Providers.Where(c=>c is IPageProvider).Select(c=>(IPageProvider)c))
 				foreach(var Page in Provider.GetPagesToScan())
 					yield return Page;
 		}
 
-		private HashSet<IPageProvider> _Providers = new HashSet<IPageProvider>();
+		private InjectionSession Session;
 	}
 }

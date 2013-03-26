@@ -1,0 +1,7 @@
+﻿"plugins": [
+	"iInjectProviders.dll"
+],
+"providers": [
+	{ "name": "Console Queue" },
+	{ "name": "Error Scanner" }
+]

@@ -1,14 +1,15 @@
-﻿using System;
+﻿using iInject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iInject {
+namespace iInjectProviders {
 	/// <summary>
 	/// Represents a page provider that reads pages from the console.
 	/// </summary>
-	public class ConsolePageProvider : IPageProvider {
+	public class ConsoleQueueProvider : IPageProvider {
 		public IEnumerable<Uri> GetPagesToScan() {
 			while(true) {
 				string Line = Console.ReadLine();
@@ -22,7 +23,7 @@ namespace iInject {
 		}
 
 		public string Name {
-			get { return "Console Page Provider"; }
+			get { return "Console Queue"; }
 		}
 	}
 }

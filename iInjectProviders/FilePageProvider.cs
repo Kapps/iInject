@@ -1,11 +1,12 @@
-﻿using System;
+﻿using iInject;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iInject {
+namespace iInjectProviders {
 	/// <summary>
 	/// A page provider that gets it's Uris from reading a file.
 	/// </summary>
@@ -15,8 +16,8 @@ namespace iInject {
 			get { return "File Page Provider"; }
 		}
 
-		public FilePageProvider(string FileName) {
-			this._FileName = FileName;
+		public FilePageProvider(ProviderOptions Options) {
+			this._FileName = null; // TODO: Implement options and get name from there.
 		}
 
 		/// <summary>

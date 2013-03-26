@@ -11,6 +11,9 @@ namespace iInject
     /// </summary>
     class VersionDetect
     {
+
+		// TODO: Make an IInjectionProvider that can post-process results, and make this be one of those.
+
         /// <summary>
         /// listen to event in session
         /// </summary>
