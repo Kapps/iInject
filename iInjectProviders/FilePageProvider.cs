@@ -16,7 +16,7 @@ namespace iInjectProviders {
 		/// Gets a unique name for this provider.
 		/// </summary>
 		public string Name {
-			get { return "File Page Queue"; }
+			get { return "File Queue"; }
 		}
 
 		/// <summary>
