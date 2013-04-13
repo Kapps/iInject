@@ -18,7 +18,7 @@ namespace iInjectProviders {
 		/// Gets the name of the vulnerability this scanner tries to exploit.
 		/// </summary>
 		public string VulnerabilityName {
-			get { return "XSS"; }
+			get { return Vulnerabilities.XSS; }
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace iInjectProviders {
 				var OldValue = Control.Value;
 				var NewValue = Control.GenerateDefaultValue(true);
 				try {
-					string RandomString = GetRandomString();
+					string RandomString = VulnerabilityHelpers.GetRandomAsciiString();
 					string InjectionContents = "<script>alert('" + RandomString + "');</script>";
 					Control.Value = NewValue + "</input>" + InjectionContents;
 					var Result = await Form.SubmitAsync(Parser, TimeSpan.FromSeconds(30));
@@ -63,14 +63,6 @@ namespace iInjectProviders {
 				}
 			}
 			return Results;
-		}
-
-		private string GetRandomString() {
-			string Result = "";
-			int NumChars = rnd.Next(24, 32);
-			for(int i = 0; i < NumChars; i++)
-				Result += (char)rnd.Next((int)'a', (int)'z' + 1);
-			return Result;
 		}
 	}
 }

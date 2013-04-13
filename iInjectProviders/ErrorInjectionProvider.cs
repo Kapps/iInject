@@ -16,7 +16,7 @@ namespace iInjectProviders {
 		/// Gets the name of the vulnerability this scanner tries to exploit.
 		/// </summary>
 		public string VulnerabilityName {
-			get { return "Sql Injection"; }
+			get { return Vulnerabilities.SQL_INJECTION; }
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace iInjectProviders {
 				var OldValue = Control.Value;
 				var NewValue = Control.GenerateDefaultValue(true);
 				try {
-					Control.Value = NewValue + "' 123asdkocxckxvisd";
+					Control.Value = NewValue + "' " + VulnerabilityHelpers.GetRandomAsciiString();
 					var Response = await Form.SubmitAsync(Parser, TimeSpan.FromSeconds(30));
 					if((int)Response.StatusCode >= 500 && (int)Response.StatusCode < 600)
 						Results.Add(new VulnerabilityDetails(Form, Control, this));

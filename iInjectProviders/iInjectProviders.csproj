@@ -44,10 +44,11 @@
     <Compile Include="ConsoleQueueProvider.cs" />
     <Compile Include="ConsoleVulnerabilityHandler.cs" />
     <Compile Include="ErrorInjectionProvider.cs" />
-    <Compile Include="EqualsAndQuotes.cs" />
     <Compile Include="FilePageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SleepInjectionProvider.cs" />
+    <Compile Include="VersionDetectionHandler.cs" />
+    <Compile Include="Vulnerabilities.cs" />
     <Compile Include="XssScriptProvider.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace iInjectProviders {
 		/// Gets the name of the vulnerability this provider tries to exploit.
 		/// </summary>
 		public string VulnerabilityName {
-			get { return "Sql Injection"; }
+			get { return Vulnerabilities.SQL_INJECTION; }
 		}
 
 		/// <summary>

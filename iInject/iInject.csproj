@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="IVulnerabilityHandler.cs" />
     <Compile Include="PageResponse.cs" />
-    <Compile Include="VersionDetect.cs" />
     <Compile Include="IInjectionProvider.cs" />
     <Compile Include="InjectionSession.cs" />
     <Compile Include="IVulnerabilityScanner.cs" />
@@ -60,6 +59,7 @@
     <Compile Include="InjectionProviders.cs" />
     <Compile Include="ProviderOptions.cs" />
     <Compile Include="VulnerabilityDetails.cs" />
+    <Compile Include="VulnerabilityHelpers.cs" />
     <Compile Include="WebForm.cs" />
     <Compile Include="WebFormControl.cs" />
   </ItemGroup>
